@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p>
+      Given an array arr[] of positive integers of size N. Reverse every
+      sub-array group of size K. Note: If at any instance, there are no more
+      subarrays of size greater than or equal to K, then reverse the last
+      subarray (irrespective of its size). You shouldn't return any array,
+      modify the given array in-place.
+    </p>
+    <p>
+      Input: N = 5, K = 3 arr[] = {1,2,3,4,5} Output: 3 2 1 5 4 Explanation:
+      First group consists of elements 1, 2, 3. Second group consists of 4,5.
+    </p>
+    <script>
+      //var n = 5;//
+      var n = 4;
+      //var k = 3;//
+      var k = 8;
+
+      //var arr = [1, 2, 3, 4, 5];//
+      var arr = [5, 6, 8, 9];
+      var group = [];
+      var sub_1 = n - 1;
+      for (var i = 0; i < n; i++) {
+        if (arr[i] == k) {
+          for (var j = i; j >= 0; j--) {
+            group.push(arr[j]);
+          }
+        }
+        if (group.length != 0) {
+          while (i != sub_1) {
+            group.push(arr[sub_1]);
+            sub_1--;
+          }
+          break;
+        }
+      }
+      console.log(group);
+    </script>
+  </body>
+</html>

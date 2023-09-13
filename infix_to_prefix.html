@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    Infix to Prefix
+    <script>
+        class Node {
+            constructor(data) {
+                this.data = data;
+                this.next = null;
+            }
+        }
+        class Prefix {
+            constructor(infix_exp) {
+                this.head = null;
+                this.prefix = null;
+                this.infix_exp = infix_exp;
+            }
+            pushPre(data) {
+                var new_node = new Node(data);
+                if (this.prefix == null) {
+                    new_node.next = null;
+                    this.prefix = new_node;
+                } else {
+                    new_node.next = this.prefix;
+                    this.prefix = new_node;
+                }
+            }
+            push(data) {
+                var new_node = new Node(data);
+                if (this.head == null) {
+                    new_node.next = null;
+                    this.head = new_node;
+                } else {
+                    new_node.next = this.head;
+                    this.head = new_node;
+                }
+            }
+            pop() {
+                var temp = this.head.data;
+                this.head = this.head.next;
+                return temp;
+            }
+            getPri(data) {
+                if (data == "*" || data == "/") {
+                    return 2;
+                } else if (data == "-" || data == "+") {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            }
+            toPrefix() {
+                for (var i = 0; i < this.infix_exp.length; i++) {
+                    if (this.infix_exp[i] == "*" || this.infix_exp[i] == "/" || this.infix_exp[i] == "+" || this
+                        .infix_exp[i] == "-" || this.infix_exp[i] == "(" || this.infix_exp[i] == ")") {
+
+                        if (this.head == null) {
+                            this.push(this.infix_exp[i]);
+                        } else {
+                            if (this.infix_exp[i] == "(") {
+                                this.push(this.infix_exp[i]);
+                            } else {
+                                if (this.infix_exp[i] == ")") {
+                                    while (this.head.data != "(") {
+                                        this.pushPre(this.pop());
+                                    }
+                                    var temp = this.pop();
+                                } else {
+                                    if (this.getPri(this.infix_exp[i]) > this.getPri(this.head.data)) {
+                                        this.push(this.infix_exp[i]);
+                                    } else {
+                                        while (this.getPri(this.infix_exp[i]) <= this.getPri(this.head.data)) {
+                                            this.pushPre(this.pop());
+                                            if (this.head == null) {
+                                                break;
+                                            }
+                                        }
+                                        this.push(this.infix_exp[i]);
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        this.pushPre(this.infix_exp[i]);
+                    }
+                }
+                while (this.head != null) {
+                    this.pushPre(this.pop());
+                }
+                while (this.prefix != null) {
+                    console.log(this.prefix.data);
+                    this.prefix = this.prefix.next;
+                }
+            }
+        }
+
+        function reverse_exp(infix_exp) {
+            var rev_infix_exp = [];
+            for (var i = infix_exp.length - 1; i >= 0; i--) {
+                if (infix_exp[i] == '(') {
+                    infix_exp[i] = ')';
+                } else if (infix_exp[i] == ')') {
+                    infix_exp[i] = '(';
+                }
+                rev_infix_exp.push(infix_exp[i]);
+            }
+            return rev_infix_exp;
+        }
+        var expresion = "(A+B)/(C-D)";
+        var arr = expresion.split('');
+        var infix_exp = reverse_exp(arr);
+        console.log(infix_exp)
+        var prefix = new Prefix(infix_exp);
+        prefix.toPrefix();
+    </script>
+</body>
+
+</html>

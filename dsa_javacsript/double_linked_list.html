@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <p>Double Linked List</p>
+    <script>
+        class Node {
+            constructor(element) {
+                this.prev = null;
+                this.element = element;
+                this.next = null;
+            }
+        }
+        class DoubleLinkedList {
+            constructor() {
+                this.head = null;
+                this.size = 0;
+            }
+            insertAtFrist(element) {
+                var node = new Node(element);
+                node.next = this.head;
+                if (this.head != null) {
+                    this.head.prev = node;
+                }
+                this.head = node;
+                this.size++;
+                console.log("Element Added At Frist");
+            }
+            insertAtLast(element) {
+                var node = new Node(element);
+                var temp = this.head;
+                while (temp.next) {
+                    temp = temp.next;
+                }
+                temp.next = node;
+                node.prev = temp;
+                this.size++;
+                console.log("Insert Element At Last !");
+            }
+            insertAtIndex(element, index) {
+                if (index == 0) {
+                    this.insertAtFrist(element);
+                } else {
+                    var node = new Node(element);
+                    var temp = this.head;
+                    var temp_index = 0;
+                    var check = false;
+                    while (temp) {
+                        if (index == temp_index) {
+                            temp.prev.next = node;
+                            node.prev = temp.prev;
+                            node.next = temp;
+                            temp.prev = node;
+                            check = true;
+                            break;
+                        }
+                        temp = temp.next;
+                        temp_index++;
+                    }
+                    if (check) {
+                        console.log("Element Inserted At Index " + index);
+                        this.size++;
+                    } else {
+                        console.log("Element Can't Insert");
+                    }
+                }
+            }
+            removeFromFrist() {
+                if (this.head != null) {
+                    this.head = this.head.next;
+                    this.size--;
+                    console.log("Removd From Frist ")
+                } else {
+                    console.log("Element Exists To Delete");
+                }
+            }
+            removeFromLast() {
+                var temp = this.head;
+
+                if (this.head == null) {
+                    console.log("List Is Empty")
+                } else {
+                    while (temp.next != null) {
+                        temp = temp.next;
+                    }
+                    if (temp.prev != null) {
+                        temp.prev.next = null;
+                    } else {
+                        this.head = null;
+                    }
+                    this.size--;
+                    console.log("Element Removed From Last ")
+                }
+            }
+            printList() {
+                var temp = this.head;
+                while (temp) {
+                    console.log(temp.element)
+                    temp = temp.next;
+                }
+            }
+        }
+        var double_linked_list = new DoubleLinkedList();
+        double_linked_list.insertAtFrist(20);
+        double_linked_list.insertAtFrist(10);
+        double_linked_list.insertAtLast(30);
+        double_linked_list.insertAtIndex(25, 2);
+        //double_linked_list.removeFromFrist();//
+        double_linked_list.removeFromLast()
+        double_linked_list.removeFromLast()
+        double_linked_list.removeFromLast()
+        double_linked_list.removeFromLast()
+        double_linked_list.removeFromLast()
+        double_linked_list.printList();
+        console.log(double_linked_list.size);
+    </script>
+</body>
+
+</html>

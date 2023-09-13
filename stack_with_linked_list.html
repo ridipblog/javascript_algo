@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Stack With Linked List</h1>
+    <script>
+        class Node {
+            constructor(data) {
+                this.data = data;
+                this.next = null;
+            }
+        }
+        class Stack {
+            constructor() {
+                this.head = null;
+            }
+            push(data) {
+                var node = new Node(data);
+                if (this.head == null) {
+                    this.head = node;
+                } else {
+                    var temp = this.head;
+                    while (temp.next != null) {
+                        temp = temp.next;
+                    }
+                    temp.next = node;
+                }
+                console.log("Data Inserted ");
+            }
+            pop() {
+                if (this.head == null) {
+                    console.log("No Data In Stack");
+                } else {
+                    var temp = this.head;
+                    if (temp.next == null) {
+                        this.head = null;
+                    } else {
+                        var prev;
+                        while (temp.next.next != null) {
+                            prev = temp;
+                            temp = temp.next;
+                        }
+                        temp.next = null;
+                    }
+                }
+            }
+            peek() {
+                if (this.head == null) {
+                    console.log("No data in Stack");
+                } else {
+                    var temp = this.head;
+                    while (temp.next != null) {
+                        temp = temp.next;
+                    }
+                    console.log(temp.data);
+                }
+            }
+            stackTraversal() {
+                if (this.head == null) {
+                    console.log("No Data In Stack");
+                    return 0;
+                }
+                while (this.head != null) {
+                    console.log(this.head.data);
+                    this.head = this.head.next;
+                }
+            }
+        }
+        var stack = new Stack();
+        stack.push(10);
+        stack.push(20);
+        stack.push(30);
+        stack.peek();
+        stack.pop();
+        stack.stackTraversal();
+    </script>
+</body>
+
+</html>

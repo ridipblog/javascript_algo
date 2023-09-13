@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Stack With Array</h1>
+    <script>
+        class stackArray {
+            constructor() {
+                this.stack = [];
+            }
+            push(data) {
+                this.stack.push(data);
+            }
+            pop() {
+                if (this.stack.length == 0) {
+                    console.log("No data In Stack");
+                    return 0;
+                }
+                this.stack.pop();
+            }
+            peek() {
+                if (this.stack.length == 0) {
+                    console.log("No Data In Stack");
+                    return 0;
+                }
+                console.log(this.stack[this.stack.length - 1]);
+            }
+            stackTraversal() {
+                if (this.stack.length == 0) {
+                    console.log("No Data In Stack ");
+                    return 0;
+                }
+                for (var i = 0; i < this.stack.length; i++) {
+                    console.log(this.stack[i]);
+                }
+            }
+        }
+        var stackarray = new stackArray();
+        stackarray.push(10);
+        stackarray.push(20);
+        stackarray.push(30);
+        stackarray.peek();
+        stackarray.pop();
+        stackarray.stackTraversal();
+    </script>
+</body>
+
+</html>

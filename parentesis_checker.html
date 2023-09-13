@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    Given an expression string x. Examine whether the pairs and the orders of {,},(,),[,] are correct in exp.
+    For example, the function should return 'true' for exp = [()]{}{[()()]()} and 'false' for exp = [(]).
+
+    Note: The drive code prints "balanced" if function return true, otherwise it prints "not balanced".
+    Input:
+    {([])}
+    Output:
+    true
+    Explanation:
+    { ( [ ] ) }. Same colored brackets can form
+    balanced pairs, with 0 number of
+    unbalanced bracket.
+    <script>
+        var parenthesis = "({}})";
+        var arr = parenthesis.split('');
+        var stack = [];
+        var top_index = -1;
+
+        function push(data) {
+            stack.push(data);
+            top_index++;
+        }
+
+        function pop() {
+            stack.pop();
+            top_index--;
+        }
+        check = true;
+        for (var i = 0; i < arr.length; i++) {
+            if (arr[i] == '{' || arr[i] == '(') {
+                push(arr[i]);
+            } else {
+                if (arr[i] == '}' || arr[i] == ')') {
+                    if (top_index == -1) {
+                        console.log("Parenthesis Not Valid ");
+                        check = false
+                        break;
+                    } else {
+                        if (arr[i] == '}' && stack[top] == ')') {
+                            console.log("Parenthesis Not Valid");
+                            check = false;
+                            break;
+                        }
+                        if (arr[i] == ')' && stack[top] == '}') {
+                            console.log("Parenthesis Not Valid");
+                            check = false;
+                            break;
+                        }
+                        pop();
+                    }
+                }
+            }
+        }
+        if (check) {
+            console.log("Parenthsis Is Valid");
+        }
+    </script>
+</body>
+
+</html>

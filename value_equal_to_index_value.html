@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Value Equal To Index Value</title>
+  </head>
+  <body>
+    <p>
+      Given an array Arr of N positive integers. Your task is to find the
+      elements whose value is equal to that of its index value ( Consider
+      1-based indexing ).
+    </p>
+    <p>
+      Note: Note: There can be more than one element in the array which have the
+      same value as its index. You need to include every such element's index.
+      Follows 1-based indexing of the array.
+    </p>
+    <p>
+      Input: N = 5 Arr[] = {15, 2, 45, 12, 7} Output: 2 Explanation: Only Arr[2]
+      = 2 exists here.
+    </p>
+    <script>
+      var n = 5;
+      var arr = [15, 2, 45, 12, 7];
+      var index = [];
+      for (var i = 0; i < n; i++) {
+        if (arr[i] == i + 1) {
+          index.push(arr[i]);
+        }
+      }
+      console.log(index);
+    </script>
+  </body>
+</html>

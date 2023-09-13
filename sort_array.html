@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    Given an array of size N containing only 0s, 1s, and 2s; sort the array in ascending order.
+    Input:
+    N = 5
+    arr[]= {0 2 1 2 0}
+    Output:
+    0 0 1 2 2
+    Explanation:
+    0s 1s and 2s are segregated
+    into ascending order.
+    <script>
+        var n = 5;
+        var arr = [5, 2, 7, 1, 0];
+        var sort = new Array(5);
+        for (var i = 0; i < 5; i++) {
+            var check = false;
+            for (var j = 0; j < 5 - i; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    var temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                    check = true;
+                }
+            }
+            if (!check) {
+                break;
+            }
+        }
+        console.log(arr);
+    </script>
+</body>
+
+</html>

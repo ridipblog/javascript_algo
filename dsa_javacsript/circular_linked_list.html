@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <p>Circular Linked List </p>
+    <script>
+        class Node {
+            constructor(data) {
+                this.data = data;
+                this.next = null;
+            }
+        }
+        class CircularLinkedList {
+            constructor() {
+                this.head = null;
+                this.size = 0;
+            }
+            insertAtFrist(data) {
+                var node = new Node(data);
+                if (this.head == null) {
+                    this.head = node;
+                    this.head.next = this.head;
+                } else {
+                    var temp_node = this.head;
+                    do {
+                        temp_node = temp_node.next;
+                    } while (temp_node.next != this.head);
+                    temp_node.next = node;
+                    node.next = this.head;
+                    this.head = node;
+                }
+                console.log("Data Is Inserted At Frist ");
+            }
+            insertAtEnd(data) {
+                var node = new Node(data);
+                if (this.head == null) {
+                    this.insertAtFrist(data);
+                } else {
+                    var temp_node = this.head;
+                    do {
+                        temp_node = temp_node.next;
+                    } while (temp_node.next != this.head)
+                    temp_node.next = node;
+                    node.next = this.head;
+                    console.log("Data Inserted At Last !");
+                }
+            }
+            insertAtIndex(data, index) {
+                if (index == 0) {
+                    this.insertAtFrist(data);
+                } else {
+                    var temp_node = this.head;
+                    var prev_node;
+                    var temp_index = 0;
+                    do {
+                        if (temp_index == index) {
+                            var node = new Node(data);
+                            node.next = temp_node;
+                            prev_node.next = node;
+                            console.log("Data Inserted At Index " + index);
+                        }
+                        prev_node = temp_node;
+                        temp_node = temp_node.next;
+                        temp_index++;
+                    } while (temp_node != this.head);
+                }
+            }
+            deleteAtFrist() {
+                if (this.head == null) {
+                    console.log("No Data Delete");
+                } else {
+                    if (this.head == this.head.next) {
+                        this.head = null;
+                    } else {
+                        var temp_node = this.head;
+                        do {
+                            temp_node = temp_node.next;
+                        } while (temp_node.next != this.head)
+                        temp_node.next = this.head.next;
+                        this.head = this.head.next;
+                    }
+                    console.log("Data Deleted At Frist");
+                }
+            }
+            deleteAtLast() {
+                if (this.head == null) {
+                    console.log("Data Not Deleted");
+                } else {
+                    if (this.head == this.head.next) {
+                        this.head = null;
+                    } else {
+                        var temp_node = this.head;
+                        var prev_node;
+                        do {
+                            prev_node = temp_node;
+                            temp_node = temp_node.next;
+                        } while (temp_node.next != this.head);
+                        prev_node.next = this.head;
+                    }
+                    console.log("Data Deleted At Last");
+                }
+            }
+            deleteAtIndex(index) {
+                if (this.head == null) {
+                    console.log("No Data Delete");
+                } else {
+                    if (index == 0) {
+                        this.deleteAtFrist();
+                    } else {
+                        var temp_node = this.head;
+                        var temp_index = 0;
+                        var prev_node;
+                        do {
+                            if (temp_index == index) {
+                                prev_node.next = temp_node.next;
+                                console.log("Data Deleted At INdex " + index);
+                            }
+                            temp_index++;
+                            prev_node = temp_node;
+                            temp_node = temp_node.next;
+                        } while (temp_node != this.head);
+                    }
+                }
+            }
+            ListTraversal() {
+                var temp_node = this.head;
+                if (this.head == null) {
+                    console.log("No Data Found");
+                } else {
+                    do {
+                        console.log(temp_node.data);
+                        temp_node = temp_node.next;
+                    } while (temp_node != this.head);
+                }
+            }
+        }
+        var circular_linked_list = new CircularLinkedList();
+        circular_linked_list.insertAtFrist(20);
+        circular_linked_list.insertAtFrist(10);
+        circular_linked_list.insertAtFrist(5);
+        circular_linked_list.insertAtEnd(30);
+        circular_linked_list.insertAtEnd(50);
+        circular_linked_list.insertAtIndex(40, 4);
+        circular_linked_list.deleteAtFrist();
+        circular_linked_list.deleteAtLast();
+        circular_linked_list.deleteAtIndex(1);
+        circular_linked_list.ListTraversal();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p>
+      Given two arrays a[] and b[] of size n and m respectively. The task is to
+      find the number of elements in the union between these two arrays. Union
+      of the two arrays can be defined as the set containing distinct elements
+      from both the arrays. If there are repetitions, then only one occurrence
+      of element should be printed in the union. Note : Elements are not
+      necessarily distinct.
+    </p>
+    <p>
+      Input: 5 3 1 2 3 4 5 1 2 3 Output: 5 Explanation: 1, 2, 3, 4 and 5 are the
+      elements which comes in the union set of both arrays. So count is 5.
+    </p>
+    <script>
+      var arr_a = [1, 2, 3];
+      var arr_b = [1, 2, 3, 4, 5];
+      var len = 0;
+      var distinct_arr = [];
+      if (arr_a.length <= arr_b.length) {
+        len = arr_b.length;
+      } else {
+        len = arr_a.length;
+      }
+      for (var i = 1; i < len; i++) {
+        if (i <= arr_a.length && i <= arr_b.length) {
+          if (arr_a[i - 1] == arr_b[i - 1]) {
+            distinct_arr.push(arr_a[i - 1]);
+          }
+        }
+      }
+      console.log(distinct_arr);
+    </script>
+  </body>
+</html>

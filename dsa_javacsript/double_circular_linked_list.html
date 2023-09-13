@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <p>Double Circular Linked List</p>
+    <script>
+        class Node {
+            constructor(data) {
+                this.prev - null;
+                this.data = data;
+                this.next = null;
+            }
+        }
+        class CircularDoubleLinkedList {
+            constructor() {
+                this.head = null;
+            }
+            insertAtFrist(data) {
+                var node = new Node(data);
+                if (this.head == null) {
+                    this.head = node;
+                    this.head.next = this.head;
+                    this.head.prev = this.head;
+                } else {
+                    node.next = this.head;
+                    node.prev = this.head.prev;
+                    this.head.prev.next = node;
+                    this.head.prev = node;
+                    this.head = node;
+                }
+                console.log("Data Inserted At frist ");
+            }
+            insertAtEnd(data) {
+                if (this.head == null) {
+                    this.insertAtFrist(data);
+                } else {
+                    var node = new Node(data);
+                    this.head.prev.next = node;
+                    node.prev = this.head.prev;
+                    node.next = this.head;
+                    this.head.prev = node;
+                    console.log("Data Inserted At End !");
+                }
+            }
+            insertAtIndex(data, index) {
+                if (this.head == null) {
+                    this.insertAtFrist(data);
+                } else {
+                    if (index == 0) {
+                        insertAtFrist(data);
+                    } else {
+                        var temp_index = 0;
+                        var temp_node = this.head;
+                        var check = false;
+                        do {
+                            if (temp_index == index) {
+                                var node = new Node(data);
+                                node.next = temp_node;
+                                node.prev = temp_node.prev;
+                                temp_node.prev.next = node;
+                                temp_node.prev = node;
+                                console.log("Data Inserted At Index " + index);
+                                check = true;
+                                break;
+                            }
+                            temp_node = temp_node.next;
+                            temp_index++;
+                        } while (temp_node != this.head)
+                        if (check === false) {
+                            console.log("Index Out Of Range");
+                        }
+                    }
+                }
+            }
+            removeAtFrist() {
+                if (this.head == null) {
+                    console.log("List Is Empty");
+                } else {
+                    if (this.head.next == this.head) {
+                        this.head = null;
+                    } else {
+                        this.head.prev.next = this.head.next;
+                        this.head.next.prev = this.head.prev;
+                        this.head = this.head.next;
+                    }
+                    console.log("Data removed ");
+                }
+            }
+            removeAtEnd() {
+                if (this.head == null) {
+                    console.log("List Is Empty");
+                } else {
+                    if (this.head.next == this.head) {
+                        this.removeAtFrist();
+                    } else {
+                        this.head.prev.prev.next = this.head;
+                        this.head.prev = this.head.prev.prev;
+                        console.log("Data Removed At Last");
+                    }
+                }
+            }
+            removeAtIndex(index) {
+                if (this.head == null) {
+                    console.log("List Is Empty");
+                } else {
+                    var temp_node = this.head;
+                    var temp_index = 0;
+                    var check = false;
+                    if (index == 0) {
+                        this.removeAtFrist();
+                    } else {
+                        do {
+                            if (temp_index == index) {
+                                temp_node.prev.next = temp_node.next;
+                                temp_node.next.prev = temp_node.prev;
+                                console.log("Data Remove At Index " + index);
+                                check = true;
+                                break;
+                            }
+                            temp_node = temp_node.next;
+                            temp_index++;
+                        } while (temp_node != this.head);
+                        if (check == false) {
+                            console.log("Index Out Of Range ");
+                        }
+                    }
+                }
+            }
+            listTraversal() {
+                var temp = this.head;
+                do {
+                    console.log(temp.data);
+                    temp = temp.next;
+                } while (temp != this.head);
+            }
+        }
+        var circular_double_linked_list = new CircularDoubleLinkedList();
+        circular_double_linked_list.insertAtFrist(10);
+        circular_double_linked_list.insertAtFrist(9);
+        circular_double_linked_list.insertAtFrist(8);
+        circular_double_linked_list.insertAtEnd(15);
+        circular_double_linked_list.insertAtEnd(20);
+        circular_double_linked_list.insertAtIndex(12, 3);
+        circular_double_linked_list.insertAtIndex(11, 3);
+        circular_double_linked_list.removeAtFrist();
+        circular_double_linked_list.removeAtEnd();
+        circular_double_linked_list.removeAtIndex(1);
+        circular_double_linked_list.removeAtIndex(1);
+        circular_double_linked_list.listTraversal();
+    </script>
+</body>
+
+</html>

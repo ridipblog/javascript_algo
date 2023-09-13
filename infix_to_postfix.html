@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    Infix to Postix
+    <script>
+        class Node {
+            constructor(data) {
+                this.data = data;
+                this.next = null;
+            }
+        }
+        class ToPostfix {
+            constructor(infix_exp) {
+                this.head = null;
+                this.postfix = null;
+                this.FinalPostfix = null;
+                this.infix_exp = infix_exp;
+            }
+            getPre(opeartor) {
+                if (opeartor == "*" || opeartor == "/") {
+                    return 2;
+                } else if (opeartor == "+" || opeartor == "-") {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            }
+            push(data) {
+                var new_node = new Node(data);
+                if (this.head == null) {
+                    new_node.next = null;
+                    this.head = new_node;
+                } else {
+                    new_node.next = this.head;
+                    this.head = new_node;
+                }
+            }
+            pop() {
+                var temp = this.head.data;
+                this.head = this.head.next;
+                return temp;
+            }
+            pushPost(data) {
+                var new_node = new Node(data);
+                if (this.postfix == null) {
+                    new_node.next = null;
+                    this.postfix = new_node;
+                } else {
+                    new_node.next = this.postfix;
+                    this.postfix = new_node;
+                }
+            }
+            popPost() {
+                var temp = this.postfix.data;
+                this.postfix = this.postfix.next;
+                return temp;
+            }
+            toPostfix() {
+                for (var i = 0; i < this.infix_exp.length; i++) {
+                    if (this.infix_exp[i] == "+" || this.infix_exp[i] == "-" || this.infix_exp[i] == "/" || this
+                        .infix_exp[i] == "*" || this.infix_exp[i] == "(" || this.infix_exp[i] == ")") {
+                        if (this.head == null) {
+                            this.push(this.infix_exp[i]);
+                        } else {
+                            if (this.infix_exp[i] == "(") {
+                                this.push(this.infix_exp[i]);
+                            } else {
+                                if (this.infix_exp[i] == ")") {
+                                    while (this.head.data != "(") {
+                                        this.pushPost(this.pop());
+                                    }
+                                    var temp = this.pop();
+                                } else {
+                                    if (this.getPre(this.infix_exp[i]) > this.getPre(this.head.data)) {
+                                        this.push(this.infix_exp[i]);
+                                    } else {
+                                        while (this.getPre(this.infix_exp[i]) <= this.getPre(this.infix_exp[i])) {
+                                            this.pushPost(this.pop());
+                                            if (this.head == null) {
+                                                break;
+                                            }
+                                        }
+                                        this.push(this.infix_exp[i]);
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        this.pushPost(this.infix_exp[i]);
+                    }
+                }
+                while (this.head != null) {
+                    this.pushPost(this.pop());
+                }
+                while (this.postfix != null) {
+                    var new_node = new Node(this.popPost());
+                    if (new_node == null) {
+                        new_node.next = null;
+                        this.FinalPostfix = new_node;
+                    } else {
+                        new_node.next = this.FinalPostfix;
+                        this.FinalPostfix = new_node;
+                    }
+                }
+                while (this.FinalPostfix != null) {
+                    console.log(this.FinalPostfix.data);
+                    this.FinalPostfix = this.FinalPostfix.next;
+                }
+            }
+        }
+        var expresion = "(A+B)/(C-D)";
+        var arr = expresion.split('');
+        var to_post = new ToPostfix(arr);
+        to_post.toPostfix()
+    </script>
+</body>
+
+</html>
