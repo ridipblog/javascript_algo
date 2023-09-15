@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    Evulation Prefix Expression
+    <script>
+        class Node {
+            constructor(data) {
+                this.data = data;
+                this.next = null;
+            }
+        }
+        class PrefixEvulation {
+            constructor(prefix_exp) {
+                this.head = null;
+                this.prefix_exp = prefix_exp;
+            }
+            push(data) {
+                var new_node = new Node(data);
+                if (this.head == null) {
+                    new_node.next = null;
+                    this.head = new_node;
+                } else {
+                    new_node.next = this.head;
+                    this.head = new_node;
+                }
+            }
+            pop() {
+                var temp = this.head.data;
+                this.head = this.head.next;
+                return temp;
+            }
+            operations(opearnd_1, opearnd_2, opearator) {
+                if (opearator == "+") {
+                    return opearnd_1 + opearnd_2;
+                }
+                if (opearator == "-") {
+                    return opearnd_1 - opearnd_2;
+                }
+                if (opearator == "*") {
+                    return opearnd_1 * opearnd_2;
+                }
+                if (opearator == "/") {
+                    return opearnd_1 / opearnd_2;
+                }
+            }
+            evulation() {
+                for (var i = 0; i < this.prefix_exp.length; i++) {
+                    if (!isNaN(parseInt(this.prefix_exp[i]))) {
+                        this.push(parseInt(this.prefix_exp[i]));
+                    } else {
+                        if (this.prefix_exp[i] == "+" || this.prefix_exp[i] == "-" || this.prefix_exp[i] == "*" ||
+                            this.prefix_exp[i] == "/") {
+                            var opearnd_1 = this.pop();
+                            var opearnd_2 = this.pop();
+                            var result = this.operations(opearnd_1, opearnd_2, this.prefix_exp[i]);
+                            this.push(result);
+                        }
+                    }
+                }
+                while (this.head != null) {
+                    console.log(this.head.data);
+                    this.head = this.head.next;
+                }
+            }
+        }
+        var expression = "- + 7 * 4 5 + 2 0";
+        var arr = expression.split(' ');
+        var rev_arr = arr.reverse();
+        var prefix_evulation = new PrefixEvulation(rev_arr);
+        prefix_evulation.evulation();
+    </script>
+</body>
+
+</html>

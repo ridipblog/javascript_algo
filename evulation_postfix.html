@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    Evulation Postfix Expression
+    <script>
+        class Node {
+            constructor(data) {
+                this.data = data;
+                this.next = null;
+            }
+        }
+        class EvulationPostfix {
+            constructor(post_exp) {
+                this.head = null;
+                this.post_exp = post_exp;
+            }
+            push(data) {
+                var new_node = new Node(data);
+                if (this.head == null) {
+                    new_node.next = null;
+                    this.head = new_node;
+                } else {
+                    new_node.next = this.head;
+                    this.head = new_node;
+                }
+            }
+            pop() {
+                var temp = this.head.data;
+                this.head = this.head.next;
+                return temp;
+            }
+            operations(num_1, num_2, operand) {
+                if (operand == "+") {
+                    return num_2 + num_1;
+                }
+                if (operand == "-") {
+                    return num_2 - num_1;
+                }
+                if (operand == "*") {
+                    return num_2 * num_1;
+                }
+                if (operand == "/") {
+                    return num_2 / num_1;
+                }
+            }
+            evulation() {
+                for (var i = 0; i < this.post_exp.length; i++) {
+                    if (!isNaN(parseInt(this.post_exp[i]))) {
+                        this.push(parseInt(this.post_exp[i]));
+                    } else {
+                        if (this.post_exp[i] == "+" || this.post_exp[i] == "-" || this.post_exp[i] == "/" || this
+                            .post_exp[i] == "*") {
+                            try {
+                                var num_1 = this.pop();
+                                var num_2 = this.pop();
+                                var result = this.operations(num_1, num_2, this.post_exp[i]);
+
+                                this.push(result);
+                            } catch (err) {
+                                console.log("Error Executed !");
+                            }
+                        }
+                    }
+                }
+                while (this.head != null) {
+                    console.log(this.head.data)
+                    this.head = this.head.next;
+                }
+            }
+        }
+        var express = "2 3 1 * + 9 -";
+        var arr = express.split(' ')
+        var evulation_postfix = new EvulationPostfix(arr);
+        evulation_postfix.evulation();
+    </script>
+</body>
+
+</html>
