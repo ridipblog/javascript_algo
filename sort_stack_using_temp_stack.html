@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    Sort A Stack Using A Temporary Stack
+
+    <script>
+        class Stack {
+            constructor() {
+                this.stack = [];
+                this.temp_stack = [];
+            }
+            push(stack_element, data) {
+                stack_element.push(data);
+            }
+            pop(stack_element) {
+                return stack_element.pop();
+            }
+            reverse() {
+                while (this.stack.length > 0) {
+                    var temp = this.pop(this.stack);
+                    while (this.temp_stack.length > 0 && this.temp_stack[this.temp_stack.length - 1] < temp) {
+                        this.push(this.stack, this.temp_stack.pop());
+                    }
+                    this.push(this.temp_stack, temp);
+                }
+            }
+        }
+        var stack = new Stack();
+        stack.push(stack.stack, 5);
+        stack.push(stack.stack, 4);
+        stack.push(stack.stack, 2);
+        stack.push(stack.stack, 7);
+        console.log(stack.stack)
+        stack.reverse();
+        console.log(stack.temp_stack)
+    </script>
+</body>
+
+</html>

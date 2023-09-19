@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    Find Next Smaller of Next Greater
+    <script>
+        arr = [5, 1, 9, 2, 5, 1, 7];
+        for (var i = 0; i < arr.length; i++) {
+            var greater = false;
+            var smaller = false;
+            for (var j = (i + 1); j < arr.length; j++) {
+                if (arr[i] < arr[j]) {
+                    console.log("Next Greater -> ", arr[i], arr[j]);
+                    greater = true;
+                    for (var k = (j + 1); k < arr.length; k++) {
+                        if (arr[j] > arr[k]) {
+                            console.log("Right Smaller -> ", arr[j], arr[k]);
+                            smaller = true;
+                            break;
+                        }
+                    }
+                    break;
+                }
+            }
+            if (greater == false) {
+                console.log("Next Greater -> ", arr[i], -1)
+                console.log("Right Smaller -> ", -1, -1);
+            }
+        }
+    </script>
+</body>
+
+</html>

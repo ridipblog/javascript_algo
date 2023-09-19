@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    Implement Stack Using Queue
+    <script>
+        class Queue {
+            constructor() {
+                this.queue = [];
+                this.frontIndex = -1;
+                this.lastIndex = this.queue.length - 1;
+            }
+            enQueue(x) {
+                var len = this.queue.length;
+                this.queue.push(x);
+                if (this.frontIndex == -1) {
+                    this.frontIndex++;
+                }
+                this.lastIndex = this.queue.length - 1;
+                for (var i = 0; i < len; i++) {
+                    var temp = this.queue[0];
+                    this.queue.shift();
+                    this.queue.push(temp);
+                }
+            }
+            top() {
+                if (this.frontIndex == -1) {
+                    return false;
+                }
+                console.log(this.queue[0]);
+            }
+            deQueue() {
+                console.log(this.queue[0]);
+                this.queue.shift();
+                this.frontIndex++;
+            }
+        }
+        var queue = new Queue();
+        queue.enQueue(1);
+        queue.enQueue(2);
+        queue.deQueue();
+        queue.enQueue(3);
+        queue.deQueue();
+        console.log(queue.queue);
+    </script>
+</body>
+
+</html>

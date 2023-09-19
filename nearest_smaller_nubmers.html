@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    Nearest Smaller Number
+    <script>
+        var arr = [1, 6, 4, 10, 2, 5];
+        for (var i = arr.length - 1; i >= 0; i--) {
+            var smaller = false;
+            for (var j = (i - 1); j >= 0; j--) {
+                if (arr[i] > arr[j]) {
+                    console.log(arr[i], arr[j]);
+                    smaller = true;
+                    break;
+                }
+            }
+            if (smaller == false) {
+                console.log(arr[i], -1)
+            }
+        }
+
+    </script>
+</body>
+
+</html>
