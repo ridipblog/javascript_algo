@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    The Stock Span Problem
+    <script>
+        var arr = [100, 80, 60, 70, 60, 75, 85];
+        var stack = new Array(arr.length);
+        stack.fill(0);
+        stack[0] = 1;
+        for (var i = 1; i < arr.length; i++) {
+            stack[i] = 1;
+            for (var j = i - 1; (j >= 0) && (arr[j] < arr[i]); j--) {
+                stack[i]++;
+            }
+        }
+        console.log(stack);
+    </script>
+</body>
+
+</html>

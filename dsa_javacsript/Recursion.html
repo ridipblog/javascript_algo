@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recursion</title>
+</head>
+
+<body>
+    <script>
+        function countDown(number) {
+            console.log(number);
+            var nextNumber = number - 1;
+            if (nextNumber > 0) {
+                countDown(nextNumber);
+            }
+        }
+        countDown(4);
+    </script>
+</body>
+
+</html>

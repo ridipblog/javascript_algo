@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    Implement Two Stack An Array
+    <script>
+        class Stack {
+            constructor() {
+                this.stack = new Array(5);
+                this.stack_top_1 = -1;
+                this.stack_top_2 = 5;
+            }
+            push(stack_index, data) {
+                if (stack_index == 1) {
+                    if ((this.stack_top_1 + 1) < this.stack_top_2) {
+                        this.stack_top_1++;
+                        this.stack[this.stack_top_1] = data;
+                    }
+                    else {
+                        console.log("Stack 1 Is Overflow");
+                    }
+                }
+                else {
+                    if ((this.stack_top_2 - 1) > this.stack_top_1) {
+                        this.stack_top_2--;
+                        this.stack[this.stack_top_2] = data;
+                    }
+                    else {
+                        console.log("Stack 2 Overflow");
+                    }
+                }
+            }
+            pop(stack_index) {
+                if (stack_index == 1) {
+                    if (this.stack_top_1 == -1) {
+                        console.log("Stack 1 Is Under Flow");
+                    }
+                    else {
+                        console.log("Pop " + this.stack[this.stack_top_1] + " From  Stack 1");
+                        this.stack_top_1--;
+                    }
+                }
+                else {
+                    if (this.stack_top_2 == 5) {
+                        console.log("Stack 2 Is Under Flow");
+                    }
+                    else {
+                        console.log("Pop " + this.stack[this.stack_top_2] + " From Stack 2");
+                        this.stack_top_2++;
+                    }
+                }
+            }
+            traversal() {
+                var stack_1 = this.stack_top_1;
+                while (stack_1 != -1) {
+                    console.log(this.stack[stack_1]);
+                    stack_1--;
+                }
+                var stack_2 = this.stack_top_2;
+                for (var i = 4; i >= this.stack_top_2; i--) {
+                    console.log(this.stack[i]);
+                }
+            }
+        }
+        var stack = new Stack();
+        stack.push(1, 10);
+        stack.push(1, 20);
+        stack.push(2, 30);
+        stack.push(2, 40);
+        stack.push(2, 50);
+        stack.pop(1);
+        stack.pop(2);
+        stack.traversal();
+        console.log(stack.stack)
+    </script>
+</body>
+
+</html>

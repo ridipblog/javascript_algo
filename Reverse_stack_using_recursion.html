@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    Reverse A Stack Using Recursion
+    <script>
+        function insert_at_bottom(x) {
+            if (stack.length == 0) {
+                stack.push(x);
+            }
+            else {
+                var temp = stack.pop();
+                insert_at_bottom(x);
+                stack.push(temp);
+
+            }
+        }
+        function reverse() {
+            if (stack.length > 0) {
+                var x = stack.pop();
+                reverse();
+                insert_at_bottom(x);
+            }
+        }
+        var stack = [1, 2, 3, 4];
+        console.log("Original Reverse Stack");
+        console.log(stack);
+        reverse();
+        console.log("After Reverse Stack");
+        console.log(stack);
+    </script>
+</body>
+
+</html>
