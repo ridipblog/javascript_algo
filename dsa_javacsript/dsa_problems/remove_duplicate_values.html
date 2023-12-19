@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var arr = [1, 2, 2, 3, 4, 3, 5, 4];
+        var short_arr = [];
+        for (var i = 0; i < arr.length; i++) {
+            var count = 0;
+            for (var j = 0; j < arr.length; j++) {
+                if (arr[i] == arr[j]) {
+                    if (count >= 2) {
+                        break;
+                    }
+                    count++;
+                }
+            }
+            if (count == 1) {
+                short_arr.push(arr[i]);
+            }
+        }
+        console.log(short_arr);
+
+    </script>
+</body>
+
+</html>
