@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var a = "dvdf";
+        var main_str = "";
+        var str = "";
+        for (var i = 0; i < a.length; i++) {
+            if (!(new RegExp(a[i]).test(str)) || a[i] == " ") {
+                str += a[i];
+            } else {
+                if (str.length > main_str.length) {
+                main_str = str;
+                }
+                str = a[i];
+            }
+        }
+        if (main_str == "" || str.length > main_str.length) {
+            main_str = str;
+        }
+        console.log(main_str);
+
+    </script>
+</body>
+
+</html>
